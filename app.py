@@ -32,7 +32,6 @@ def search():
 
         uploaded_image_features = extract_features(image_path)
 
-        # Normalize the uploaded image features
         uploaded_image_features = uploaded_image_features / np.linalg.norm(uploaded_image_features)
 
         similar_images_ids = find_similar_images(uploaded_image_features)
@@ -40,7 +39,6 @@ def search():
         with open('static/formatted_products.json', 'r') as f:
             formatted_products = json.load(f)
 
-        # Find corresponding product information
         similar_images = [
             product for product in formatted_products 
             if product['id'] in similar_images_ids
@@ -64,14 +62,11 @@ def find_similar_images(uploaded_features):
     for image_data in features_data:
         image_features = np.array(image_data['features'])
         
-        # Normalize the product features
         image_features = image_features / np.linalg.norm(image_features)
         
-        # Compute cosine similarity between uploaded image and the product features
         similarity_score = cosine_similarity([uploaded_features], [image_features])[0][0]
         print(similarity_score)
-        # You can experiment with this threshold to find the best value
-        if similarity_score > 0.4:  # Adjust threshold if needed
+        if similarity_score > 0.32:
             similar_image_ids.append(image_data['id'])
 
     return similar_image_ids
