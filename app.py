@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import os
 import json
 import numpy as np
@@ -6,13 +6,23 @@ import tensorflow as tf
 from sklearn.metrics.pairwise import cosine_similarity
 import random
 import math
+from googletrans import Translator
 
+
+
+translator = Translator()
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-here'  # Required for session
-
+app.secret_key = 'your-secret-key-here'
 UPLOAD_FOLDER = 'static/uploads'
 PRODUCTS_PER_PAGE = 12
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+
+def Translate(word):
+    return translator.translate(word, src="en", dest="ar").text
+
+
+
 
 with open('static/extracted_product_features.json', 'r') as f:
     features_data = json.load(f)
@@ -23,16 +33,12 @@ with open('static/formatted_products.json', 'r') as f:
 @app.route('/', methods=['GET'])
 def index():
     page = request.args.get('page', 1, type=int)
-    # Get 12 random products to display
     all_random_products = random.sample(formatted_products, len(formatted_products))
     
-    # Calculate pagination values
     total_products = len(all_random_products)
     total_pages = math.ceil(total_products / PRODUCTS_PER_PAGE)
     start_idx = (page - 1) * PRODUCTS_PER_PAGE
     end_idx = start_idx + PRODUCTS_PER_PAGE
-    
-    # Get products for current page
     current_page_products = all_random_products[start_idx:end_idx]
     
     return render_template('index.html', 
@@ -42,9 +48,18 @@ def index():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
+    query = request.args.get('query', '').lower()
     page = request.args.get('page', 1, type=int)
     
-    if request.method == 'POST':
+    if query:
+        search_results = []
+        for product in formatted_products:
+            if (query in product['category'].lower() or 
+                query in product.get('description', '').lower()):
+                search_results.append(product)
+        similar_images = search_results
+    elif request.method == 'POST':
+        # Image-based search (existing code)
         if 'image' not in request.files:
             return redirect(request.url)
 
@@ -56,29 +71,28 @@ def search():
 
             uploaded_image_features = extract_features(image_path)
             uploaded_image_features = uploaded_image_features / np.linalg.norm(uploaded_image_features)
-            similar_images_ids = find_similar_images(uploaded_image_features)
-            
-            # Store just the IDs in session
+            similar_images_ids = find_similar_images(uploaded_image_features)   
             session['search_result_ids'] = similar_images_ids
+            similar_images = [
+                product for product in formatted_products 
+                if product['id'] in session['search_result_ids']
+            ]
         else:
             return redirect(request.url)
-    
-    # Get products based on stored IDs or show all products
-    if 'search_result_ids' in session:
-        similar_images = [
-            product for product in formatted_products 
-            if product['id'] in session['search_result_ids']
-        ]
     else:
         similar_images = formatted_products
 
-    # Calculate pagination values
+    # If it's an AJAX request (from speech recognition)
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return jsonify({
+            'products': similar_images[:PRODUCTS_PER_PAGE]  # Return first page of results
+        })
+
     total_products = len(similar_images)
     total_pages = math.ceil(total_products / PRODUCTS_PER_PAGE)
     start_idx = (page - 1) * PRODUCTS_PER_PAGE
     end_idx = start_idx + PRODUCTS_PER_PAGE
     
-    # Get products for current page
     current_page_products = similar_images[start_idx:end_idx]
 
     return render_template('index.html', 

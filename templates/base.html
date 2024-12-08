@@ -88,7 +88,7 @@
                                     <input type="text" placeholder="Enter your search key ...">
                                     <input type="file" id="file-input" class="file-input" name="image" accept="image/*" required>
                                     <button class="attach-btn" onclick="document.getElementById('file-input').click();"><i class="fa fa-paperclip"></i></button>
-                                    <button class="speech-btn"><i class="fa fa-microphone"></i></button>
+                                    <button id="start" class="speech-btn"><i class="fa fa-microphone"></i></button>
                                     <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                                 <div class="header-middle-right">
@@ -717,6 +717,7 @@
         <script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/scrollUp.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/SpeechToText.js') }}"></script>
     </body>
 
 </html>
