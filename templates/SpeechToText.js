@@ -1,11 +1,27 @@
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
-recognition.lang = 'en-US';
+let currentLanguage = 'en-US';
+recognition.lang = currentLanguage;
 recognition.interimResults = false; 
 recognition.continuous = false;
 
 const startButton = document.getElementById('start');
+
+// Add language switching functionality
+document.querySelectorAll('.ht-setting-list li').forEach(li => {
+    li.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentLanguage = li.dataset.lang;
+        recognition.lang = currentLanguage;
+        document.getElementById('currentLang').textContent = 
+            currentLanguage === 'en-US' ? 'English' : 'العربية';
+        
+        // Update active state
+        document.querySelector('.ht-setting-list li.active').classList.remove('active');
+        li.classList.add('active');
+    });
+});
 
 startButton.addEventListener('click', () => {
     recognition.start();

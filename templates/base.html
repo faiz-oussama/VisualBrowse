@@ -32,34 +32,16 @@
                 <div class="header-top">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-3 col-md-4">
-                                <div class="header-top-left">
-                                    <ul class="phone-wrap">
-                                        <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-9 col-md-8">
+                            <div class="col-lg-9 col-md-8"style="margin-left:300px;">
                                 <div class="header-top-right">
                                     <ul class="ht-menu">
                                         <li>
-                                            <div class="ht-setting-trigger"><span>Setting</span></div>
-                                            <div class="setting ht-setting">
-                                                <ul class="ht-setting-list">
-                                                    <li><a href="login-register.html">My Account</a></li>
-                                                    <li><a href="checkout.html">Checkout</a></li>
-                                                    <li><a href="login-register.html">Sign In</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                        <li>
                                             <span class="language-selector-wrapper">Language :</span>
-                                            <div class="ht-language-trigger"><span>English</span></div>
+                                            <div class="ht-language-trigger"><span id="currentLang">English</span></div>
                                             <div class="language ht-language">
                                                 <ul class="ht-setting-list">
-                                                    <li class="active"><a href="#"><img src="images/menu/flag-icon/1.jpg" alt="">English</a></li>
-                                                    <li><a href="#"><img src="images/menu/flag-icon/2.jpg" alt="">Français</a></li>
+                                                    <li class="active" data-lang="en-US"><a href="#"><img src="images/menu/flag-icon/1.jpg" alt="">English</a></li>
+                                                    <li data-lang="ar-SA"><a href="#"><img src="images/menu/flag-icon/3.jpg" alt="">العربية</a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -188,21 +170,12 @@
                     </div>
                 </div>
                 
-                <div class="mobile-menu-area d-lg-none d-xl-none col-12">
-                    <div class="container"> 
-                        <div class="row">
-                            <div class="mobile-menu">
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </header>
             <div class="breadcrumb-area">
                 <div class="container">
                     <div class="breadcrumb-content">
                         <ul>
                             <li><a href="index.html">Home</a></li>
-                            <li class="active">Shop Left Sidebar</li>
                         </ul>
                     </div>
                 </div>
@@ -232,13 +205,6 @@
                                     <div class="product-short">
                                         <p>Sort By:</p>
                                         <select class="nice-select">
-                                            <option value="trending">Relevance</option>
-                                            <option value="sales">Name (A - Z)</option>
-                                            <option value="sales">Name (Z - A)</option>
-                                            <option value="rating">Price (Low &gt; High)</option>
-                                            <option value="date">Rating (Lowest)</option>
-                                            <option value="price-asc">Model (A - Z)</option>
-                                            <option value="price-asc">Model (Z - A)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -268,33 +234,14 @@
                                     <ul>
                                         <li class="has-sub"><a href="# ">Prime Video</a>
                                             <ul>
-                                                <li><a href="#">All Videos</a></li>
-                                                <li><a href="#">Blouses</a></li>
-                                                <li><a href="#">Evening Dresses</a></li>
-                                                <li><a href="#">Summer Dresses</a></li>
-                                                <li><a href="#">T-Rent or Buy</a></li>
-                                                <li><a href="#">Your Watchlist</a></li>
-                                                <li><a href="#">Watch Anywhere</a></li>
-                                                <li><a href="#">Getting Started</a></li>  
                                             </ul>
                                         </li>
                                         <li class="has-sub"><a href="#">Computer</a>
-                                            <ul>
-                                                <li><a href="#">TV & Video</a></li>
-                                                <li><a href="#">Audio & Theater</a></li>
-                                                <li><a href="#">Camera, Photo</a></li>
-                                                <li><a href="#">Cell Phones</a></li>
-                                                <li><a href="#">Headphones</a></li>
-                                                <li><a href="#">Video Games</a></li>
-                                                <li><a href="#">Wireless Speakers</a></li> 
+                                            <ul> 
                                             </ul>
                                         </li>
                                         <li class="has-sub"><a href="#">Electronics</a>
-                                            <ul>
-                                                <li><a href="#">Amazon Home</a></li>
-                                                <li><a href="#">Kitchen & Dining</a></li>
-                                                <li><a href="#">Bed & Bath</a></li>
-                                                <li><a href="#">Appliances</a></li>    
+                                            <ul>  
                                             </ul>
                                         </li>
                                     </ul>
@@ -374,12 +321,6 @@
                                 </div>
                                 <div class="category-tags">
                                     <ul>
-                                        <li><a href="# ">Devita</a></li>
-                                        <li><a href="# ">Cameras</a></li>
-                                        <li><a href="# ">Sony</a></li>
-                                        <li><a href="# ">Computer</a></li>
-                                        <li><a href="# ">Big Sale</a></li>
-                                        <li><a href="# ">Accessories</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -493,55 +434,6 @@
                                         </ul>
                                     </div>
                                 </div>
-                               
-                                <div class="col-lg-4">
-                                    <div class="footer-block">
-                                        <h3 class="footer-block-title">Follow Us</h3>
-                                        <ul class="social-link">
-                                            <li class="twitter">
-                                                <a href="https://twitter.com/" data-toggle="tooltip" target="_blank" title="Twitter">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li class="rss">
-                                                <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="RSS">
-                                                    <i class="fa fa-rss"></i>
-                                                </a>
-                                            </li>
-                                            <li class="google-plus">
-                                                <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank" title="Google +">
-                                                    <i class="fa fa-google-plus"></i>
-                                                </a>
-                                            </li>
-                                            <li class="facebook">
-                                                <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank" title="Facebook">
-                                                    <i class="fa fa-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li class="youtube">
-                                                <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank" title="Youtube">
-                                                    <i class="fa fa-youtube"></i>
-                                                </a>
-                                            </li>
-                                            <li class="instagram">
-                                                <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank" title="Instagram">
-                                                    <i class="fa fa-instagram"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="footer-newsletter">
-                                        <h4>Sign up to newsletter</h4>
-                                        <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="footer-subscribe-form validate" target="_blank" novalidate>
-                                           <div id="mc_embed_signup_scroll">
-                                              <div id="mc-form" class="mc-form subscribe-form form-group" >
-                                                <input id="mc-email" type="email" autocomplete="off" placeholder="Enter your email" />
-                                                <button  class="btn" id="mc-submit">Subscribe</button>
-                                              </div>
-                                           </div>
-                                        </form>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -623,69 +515,6 @@
                                             <div class="sm-image"><img src="images/product/small-size/4.jpg" alt="product image thumb"></div>
                                             <div class="sm-image"><img src="images/product/small-size/5.jpg" alt="product image thumb"></div>
                                             <div class="sm-image"><img src="images/product/small-size/6.jpg" alt="product image thumb"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-7 col-md-6 col-sm-6">
-                                    <div class="product-details-view-content pt-60">
-                                        <div class="product-info">
-                                            <h2>Today is a good day Framed poster</h2>
-                                            <span class="product-details-ref">Reference: demo_15</span>
-                                            <div class="rating-box pt-20">
-                                                <ul class="rating rating-with-review-item">
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="review-item"><a href="#">Read Review</a></li>
-                                                    <li class="review-item"><a href="#">Write Review</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="price-box pt-20">
-                                                <span class="new-price new-price-2">$57.98</span>
-                                            </div>
-                                            <div class="product-desc">
-                                                <p>
-                                                    <span>100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom. Lorem ipsum dolor sit amet, consectetur adipisicing elit. quibusdam corporis, earum facilis et nostrum dolorum accusamus similique eveniet quia pariatur.
-                                                    </span>
-                                                </p>
-                                            </div>
-                                            <div class="product-variants">
-                                                <div class="produt-variants-size">
-                                                    <label>Dimension</label>
-                                                    <select class="nice-select">
-                                                        <option value="1" title="S" selected="selected">40x60cm</option>
-                                                        <option value="2" title="M">60x90cm</option>
-                                                        <option value="3" title="L">80x120cm</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="single-add-to-cart">
-                                                <form action="#" class="cart-quantity">
-                                                    <div class="quantity">
-                                                        <label>Quantity</label>
-                                                        <div class="cart-plus-minus">
-                                                            <input class="cart-plus-minus-box" value="1" type="text">
-                                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                                        </div>
-                                                    </div>
-                                                    <button class="add-to-cart" type="submit">Add to cart</button>
-                                                </form>
-                                            </div>
-                                            <div class="product-additional-info pt-25">
-                                                <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a>
-                                                <div class="product-social-sharing pt-25">
-                                                    <ul>
-                                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
-                                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
-                                                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
-                                                        <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

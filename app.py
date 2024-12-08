@@ -7,6 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import random
 import math
 from googletrans import Translator
+from langdetect import detect
 
 
 
@@ -19,16 +20,33 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
 def Translate(word):
-    return translator.translate(word, src="en", dest="ar").text
+    try:
+        return translator.translate(word, src="en", dest="ar").text
+    except:
+        return word
 
 
 
 
-with open('static/extracted_product_features.json', 'r') as f:
+with open('static/extracted_product_features.json', 'r', encoding='utf-8') as f:
     features_data = json.load(f)
 
-with open('static/formatted_products.json', 'r') as f:
+with open('static/formatted_products.json', 'r', encoding='utf-8') as f:
     formatted_products = json.load(f)
+
+def contains_pattern(text, pattern):
+    if not text or not pattern:
+        return False
+    
+    i = 0  # index for pattern
+    j = 0  # index for text
+    
+    while i < len(pattern) and j < len(text):
+        if pattern[i] == text[j]:
+            i += 1
+        j += 1
+    
+    return i == len(pattern)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -48,18 +66,46 @@ def index():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    query = request.args.get('query', '').lower()
+    query = request.args.get('query', '')
     page = request.args.get('page', 1, type=int)
     
+    print(f"Received query: {query}")
+    
     if query:
+        try:
+            detected_lang = detect(query)
+            print(f"Detected language: {detected_lang}")
+        except Exception as e:
+            print(f"Language detection error: {e}")
+            detected_lang = 'en'
+            
         search_results = []
-        for product in formatted_products:
-            if (query in product['category'].lower() or 
-                query in product.get('description', '').lower()):
-                search_results.append(product)
+        
+        if detected_lang in ['ar', 'fa']:
+            print("Processing Arabic search...")
+            for product in formatted_products:
+                category_ar = product.get('category_ar', '')
+                description_ar = product.get('description_ar', '')
+                
+                # Split query into words and check each word
+                query_words = query.split()
+                for word in query_words:
+                    if (contains_pattern(category_ar, word) or 
+                        contains_pattern(description_ar, word)):
+                        search_results.append(product)
+                        print(f"Found match for '{word}' in: {category_ar} or {description_ar}")
+                        break
+        else:
+            print("Processing English search...")
+            for product in formatted_products:
+                if (query.lower() in product['category'].lower() or 
+                    query.lower() in product.get('description', '').lower()):
+                    search_results.append(product)
+                    
         similar_images = search_results
+        print(f"Total results found: {len(search_results)}")
     elif request.method == 'POST':
-        # Image-based search (existing code)
+        # Image search code remains the same
         if 'image' not in request.files:
             return redirect(request.url)
 
@@ -85,7 +131,7 @@ def search():
     # If it's an AJAX request (from speech recognition)
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return jsonify({
-            'products': similar_images[:PRODUCTS_PER_PAGE]  # Return first page of results
+            'products': similar_images[:PRODUCTS_PER_PAGE]
         })
 
     total_products = len(similar_images)
