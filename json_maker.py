@@ -11,7 +11,7 @@ categories = [
     "Car accessories", "Tires", "Car batteries", "GPS devices", "Car seats", "Dash cams",
     "Fiction novels", "Non-fiction books", "Children's books", "Textbooks", "Cookbooks", "Self-help books",
     "Makeup", "Skincare", "Haircare", "Fragrances", "Nail care", "Beauty tools",
-    "Printers", "Office chairs", "Desk organizers", "Stationery", "Projectors", "Whiteboards"
+    "Printers", "Office chairs", "Desk organizers", "Stationery", "Projectors", "Whiteboards" 
 ]
 
 all_products = []
